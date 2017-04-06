@@ -54,18 +54,19 @@
                 <div id="form">
                     <form action="#" method="POST">
                        
-                        <input type="text" id="fname" name="firstname" placeholder="First Name..">
+                        <input type="text" name="firstname" placeholder="First Name..">
                         
-                        <input type="text" id="lname" name="lastname" placeholder="Last Name.."><br><br>
+                        <input type="text" name="lastname" placeholder="Last Name.."><br><br>
                        
-                        <input type="text" id="lname" name="lastname" placeholder="mobile number or email"><br><br>
+                        <input type="text" name="mail" placeholder="mobile number or email"><br><br>
                         <input type="password" id="password" name="password" placeholder="password"><br><br>
                         <label>Birthday</label><br>
-                        <input type="date" name="date"><h6> Why do I to provide my date of birth</h6><br><br>
+                        <input type="date" name="date"><h6> Why do I need to provide my date of birth?</h6><br><br>
                         <input type="radio" name="gender" value="male" checked> Male
                         <input type="radio" name="gender" value="female"> Female
                         <input type="radio" name="gender" value="other" checked> Other<br><br>
-                        <button class="btn success" style="background-color: green; color: white">Create New Account</button>
+                        
+                        <input type="submit" name="submit" value="Create New Account" style="background-color: green; color: white">
                        
                     </form>
                 </div>
@@ -80,8 +81,13 @@
     if (isset ($_POST ['submit']))
     {
     extract($_POST);
-    echo "$firstname $lastname <br>";
-    echo "$gender <br>";
-    echo "$number";
+    
+//connect to the server
+   $connect=mysqli_connect("localhost", "root", "", "fb");
+//query
+    $query="INSERT INTO facebook VALUES ('$firstname', '$lastname', '$mail', '$gender');";
+    //execute the query
+    mysqli_query($connect, "$query");
+    echo "successfull";
     }
     ?>
